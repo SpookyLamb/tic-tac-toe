@@ -4,7 +4,7 @@
     border-width: 0px;
     border-top-width: 2px;
     border-bottom-width: 2px;
-    height: 10vh;
+    height: 13vh;
 }
 
 .board-col {
@@ -12,7 +12,7 @@
     border-width: 0px;
     border-left-width: 2px;
     border-right-width: 2px;
-    width: 10vh;
+    width: 13vh;
 }
 
 .game-square {
@@ -22,4 +22,13 @@
 .input-field {
     margin-bottom: 2vh;
     width: 100px;
+}
+
+.hidden-obj {
+    visibility: hidden;
+}
+
+.win-count {
+    margin-top: 1vh;
+    margin-bottom: 1vh;
 }

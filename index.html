@@ -24,27 +24,29 @@
                 <div class="col-12 d-flex mx-auto">
                     <div class="mx-auto" id="game-board">
                         <div class="row board-row">
-                            <div class="col-4 board-col game-square" id="0"></div>
-                            <div class="col-4 board-col game-square" id="1"></div>
-                            <div class="col-4 board-col game-square" id="2"></div>
+                            <div class="col-4 board-col game-square text-center" id="0"></div>
+                            <div class="col-4 board-col game-square text-center" id="1"></div>
+                            <div class="col-4 board-col game-square text-center" id="2"></div>
                         </div>
                         <div class="row board-row">
-                            <div class="col-4 board-col game-square" id="3"></div>
-                            <div class="col-4 board-col game-square" id="4"></div>
-                            <div class="col-4 board-col game-square" id="5"></div>
+                            <div class="col-4 board-col game-square text-center" id="3"></div>
+                            <div class="col-4 board-col game-square text-center" id="4"></div>
+                            <div class="col-4 board-col game-square text-center" id="5"></div>
                         </div>
                         <div class="row board-row">
-                            <div class="col-4 board-col game-square" id="6"></div>
-                            <div class="col-4 board-col game-square" id="7"></div>
-                            <div class="col-4 board-col game-square" id="8"></div>
+                            <div class="col-4 board-col game-square text-center" id="6"></div>
+                            <div class="col-4 board-col game-square text-center" id="7"></div>
+                            <div class="col-4 board-col game-square text-center" id="8"></div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row text-center">
                 <p id="game-text">TEXT</p>
-                <div class="col-6 mx-auto">
+                <div class="col-12 mx-auto text-center">
                     <button class="btn btn-primary" id="reset">RESTART</button>
+                    <h2 class="win-count hidden-obj" id="p1-wins">P1 WINS: 0</h2>
+                    <h2 class="win-count hidden-obj" id="p2-wins">P2 WINS: 0</h2>
                 </div>
             </div>
         </div>

@@ -8,7 +8,7 @@
 // There should be a Restart Game button that does not refresh the page (set state). (DONE)
 
 // Could Have: 
-// Allow players to enter their names
+// Allow players to enter their names (DONE)
 // Keep track of the number of games won by X and O
 // Save information in local storage
 // Add a link to rules, display in a modal
@@ -27,12 +27,19 @@ let game_over = true;
 let p1_name = "X";
 let p2_name = "O";
 
+let p1_win_count = 0;
+let p2_win_count = 0;
+
 let boardState = [0, 0, 0, 0, 0, 0, 0, 0, 0]; //9 squares, left to right, top to bottom - 0 is blank, 1 is X, 2 (or above) is O
 
 const game_text = document.getElementById("game-text");
 const reset_button = document.getElementById("reset");
+
 const p1_input = document.getElementById("p1-input");
 const p2_input = document.getElementById("p2-input");
+
+const p1_wins = document.getElementById("p1-wins");
+const p2_wins = document.getElementById("p2-wins");
 
 function init() {
     addClickEvents()
@@ -74,6 +81,12 @@ function reset() {
     reset_button.textContent = "RESTART"
     p1_name = p1_input.value
     p2_name = p2_input.value //names
+
+    p1_wins.classList.remove("hidden-obj") //wins
+    p2_wins.classList.remove("hidden-obj") //wins
+
+    p1_wins.textContent = p1_name + " WINS: " + String(p1_win_count)
+    p2_wins.textContent = p2_name + " WINS: " + String(p2_win_count)
 
     game_over = false
     boardState = [0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -190,9 +203,13 @@ function doWin(victor) {
     
     if (victor) { //anything other than 0
         if (victor < 2) { //X win
-            game_text.textContent = "X has WON!"
+            p1_win_count += 1
+            game_text.textContent = p1_name + " has WON!"
+            p1_wins.textContent = p1_name + " WINS: " + String(p1_win_count)
         } else { //O win
-            game_text.textContent = "O has WON!"
+            p2_win_count += 1
+            game_text.textContent = p2_name + " has WON!"
+            p2_wins.textContent = p2_name + " WINS: " + String(p2_win_count)
         }
     } else { //0 is false, Cat
         game_text.textContent = "DRAW! (Cat's Game)"
