@@ -8,13 +8,13 @@
 // There should be a Restart Game button that does not refresh the page (set state). (DONE)
 
 // Could Have: 
+// Randomize who goes first (DONE)
 // Allow players to enter their names (DONE)
-// Keep track of the number of games won by X and O
-// Save information in local storage
+// Keep track of the number of games won by X and O (DONE)
+// Save information in local storage 
+// Only have a single <div id="app"></div> in your index.HTML (try to code golf the HTML file)
 // Add a link to rules, display in a modal
 // Selectable themes - different board, background, and alternatives to X/O displays
-// Only have a single <div id="app"></div> in your index.HTML (try to code golf the HTML file)
-// Randomize who goes first
 // Display multiple game boards at once
 
 // Wish List:
@@ -46,7 +46,7 @@ function init() {
     game_text.textContent = "Enter names, then press START!"
     reset_button.textContent = "START"
     reset_button.addEventListener("click", reset)
-    //reset()
+    loadGame()
 }
 
 function addClickEvents() {
@@ -128,8 +128,9 @@ function click(e) {
         boardState[index] = 2 //O
     }
 
-    console.log(boardState)
-
+    //console.log(boardState)
+    
+    saveGame()
     checkWin()
 }
 
@@ -205,26 +206,97 @@ function doWin(victor) {
         if (victor < 2) { //X win
             p1_win_count += 1
             game_text.textContent = p1_name + " has WON!"
-            p1_wins.textContent = p1_name + " WINS: " + String(p1_win_count)
         } else { //O win
             p2_win_count += 1
             game_text.textContent = p2_name + " has WON!"
-            p2_wins.textContent = p2_name + " WINS: " + String(p2_win_count)
         }
     } else { //0 is false, Cat
         game_text.textContent = "DRAW! (Cat's Game)"
     }
 
+    setWinCounts()
     game_over = true //require the players to reset
+    saveGame()
 }
 
 function switchTurn() {
     turn_x = !turn_x //flip
+    setTurn()
+}
 
+function saveGame() {
+    //save game information to local storage so it will show when refreshed
+
+    // needs to store the following vars:
+    // turn_x
+    // game_over
+    // p1_name
+    // p2_name
+    // p1_win_count
+    // p2_win_count
+    // boardState
+
+    localStorage.setItem("turn_x", JSON.stringify(turn_x))
+    localStorage.setItem("game_over", JSON.stringify(game_over))
+    localStorage.setItem("p1_name", JSON.stringify(p1_name))
+    localStorage.setItem("p2_name", JSON.stringify(p2_name))
+    localStorage.setItem("p1_win_count", JSON.stringify(p1_win_count))
+    localStorage.setItem("p2_win_count", JSON.stringify(p2_win_count))
+    localStorage.setItem("boardState", JSON.stringify(boardState))
+}
+
+function loadGame() {
+    //loads all the vars from saveGame()
+
+    if (localStorage.getItem("game_over") === null) { //invalid local storage
+        saveGame() //create new storage data from defaults
+        return
+    }
+
+    turn_x = JSON.parse(localStorage.getItem("turn_x"))
+    game_over = JSON.parse(localStorage.getItem("game_over"))
+    p1_name = JSON.parse(localStorage.getItem("p1_name"))
+    p2_name = JSON.parse(localStorage.getItem("p2_name"))
+    p1_win_count = JSON.parse(localStorage.getItem("p1_win_count"))
+    p2_win_count = JSON.parse(localStorage.getItem("p2_win_count"))
+    boardState = JSON.parse(localStorage.getItem("boardState"))
+
+    //adjusts the visuals to match
+    setBoardState()
+    setTurn()
+    setWinCounts()
+}
+
+function setTurn() {
+    if (game_over) {
+        game_text.textContent = "GAME OVER! Click RESTART!"
+        return
+    }
+    
     if (turn_x) {
         game_text.textContent = p1_name + " to move"
     } else {
         game_text.textContent = p2_name + " to move"
+    }
+}
+
+function setWinCounts() {
+    p1_wins.textContent = p1_name + " WINS: " + String(p1_win_count)
+    p2_wins.textContent = p2_name + " WINS: " + String(p2_win_count)
+}
+
+function setBoardState() {
+    //only called by loadGame()
+    let squares = document.getElementsByClassName("game-square") //should load in the right order, indexes corresponding correctly
+
+    for (let i = 0; i < squares.length; i++) {
+        let element = squares.item(i)
+        
+        if (boardState[i] === 1) { //X
+            element.textContent = "X"
+        } else if (boardState[i] === 2) { //O
+            element.textContent = "O"
+        } //else, leave blank
     }
 }
 
