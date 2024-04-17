@@ -1,0 +1,16 @@
+
+.board-row {
+    border-style: solid;
+    border-width: 0px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    height: 10vh;
+}
+
+.board-col {
+    border-style: solid;
+    border-width: 0px;
+    border-left-width: 2px;
+    border-right-width: 2px;
+    width: 10vh;
+}

@@ -25,4 +25,37 @@ function init() {
 
 }
 
+function buildElement(tag, class_list, parent_node) {
+    //takes tag (string), class_list (array of strings), element_id (string)
+    //return the created node to be used elsewhere
+
+    let node = document.createElement(tag)
+
+    if (class_list.length > 0) { //empty array is ignored
+        for (let i = 0; i < class_list.length; i++) {
+            node.classList.add( class_list[i] )
+        }
+    }
+
+    parent_node.appendChild(node)
+
+    return node
+}
+
+function reset() {
+
+}
+
+function click() {
+
+}
+
+function checkWin() {
+    //also checks for draws
+}
+
+function switchTurn() {
+
+}
+
 init()
