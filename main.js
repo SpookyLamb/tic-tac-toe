@@ -262,7 +262,6 @@ function loadGame() {
     p2_win_count = JSON.parse(localStorage.getItem("p2_win_count"))
     boardState = JSON.parse(localStorage.getItem("boardState"))
 
-    console.log(turn_x)
 
     //adjusts the visuals to match
     p1_input.value = p1_name
