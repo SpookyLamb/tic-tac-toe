@@ -43,9 +43,14 @@ const p2_wins = document.getElementById("p2-wins");
 
 function init() {
     addClickEvents()
+    
     game_text.textContent = "Enter names, then press START!"
     reset_button.textContent = "START"
+
     reset_button.addEventListener("click", reset)
+    p1_input.addEventListener("input", changeNames)
+    p2_input.addEventListener("input", changeNames)
+
     loadGame()
 }
 
@@ -57,6 +62,10 @@ function addClickEvents() {
         let element = squares.item(i)
         element.addEventListener("click", click)
     }
+}
+
+function buildPage() {
+
 }
 
 function buildElement(tag, class_list, parent_node) {
@@ -77,8 +86,28 @@ function buildElement(tag, class_list, parent_node) {
 }
 
 function changeNames() {
-    p1_name = p1_input.value
-    p2_name = p2_input.value //names
+    p1_input_value = p1_input.value
+
+    if (p1_name !== p1_input_value) {
+        p1_name = p1_input_value
+        p1_win_count = 0
+    }
+    
+    if (!p1_name) { //empty string
+        p1_name = "X"
+    }
+
+    p2_input_value = p2_input.value
+
+    if (p2_name !== p2_input_value) {
+        p2_name = p2_input_value
+        p2_win_count = 0
+    }
+
+    if (!p2_name) {
+        p2_name = "O"
+    }
+
     setWinCounts()
 }
 
