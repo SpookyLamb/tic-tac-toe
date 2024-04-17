@@ -1,11 +1,11 @@
-// Must Have:
+// Must Have: (DONE)
 // Game tiles should only be clickable once, and if the game is over they should not be clickable at all. (DONE)
 // The game should display who wins the game if someone wins, otherwise, say that the game resulted in a tie (cat). (DONE)
-// On each player’s turn, that player places their symbol on an unoccupied space by clicking.
+// On each player’s turn, that player places their symbol on an unoccupied space by clicking. (DONE)
 
-// Should Have:
-// The game should let the players know who's turn it is.
-// There should be a Restart Game button that does not refresh the page (set state).
+// Should Have: (DONE)
+// The game should let the players know who's turn it is. (DONE)
+// There should be a Restart Game button that does not refresh the page (set state). (DONE)
 
 // Could Have: 
 // Allow players to enter their names
@@ -22,17 +22,24 @@
 // Recreate Go
 
 let turn_x = true;
-let game_over = false;
+let game_over = true;
+
+let p1_name = "X";
+let p2_name = "O";
 
 let boardState = [0, 0, 0, 0, 0, 0, 0, 0, 0]; //9 squares, left to right, top to bottom - 0 is blank, 1 is X, 2 (or above) is O
 
-const game_text = document.getElementById("game-text")
-const reset_button = document.getElementById("reset")
+const game_text = document.getElementById("game-text");
+const reset_button = document.getElementById("reset");
+const p1_input = document.getElementById("p1-input");
+const p2_input = document.getElementById("p2-input");
 
 function init() {
     addClickEvents()
+    game_text.textContent = "Enter names, then press START!"
+    reset_button.textContent = "START"
     reset_button.addEventListener("click", reset)
-    reset()
+    //reset()
 }
 
 function addClickEvents() {
@@ -64,6 +71,10 @@ function buildElement(tag, class_list, parent_node) {
 
 function reset() {
     //resets the game to its initial state, including picking a new turn
+    reset_button.textContent = "RESTART"
+    p1_name = p1_input.value
+    p2_name = p2_input.value //names
+
     game_over = false
     boardState = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 
@@ -194,9 +205,9 @@ function switchTurn() {
     turn_x = !turn_x //flip
 
     if (turn_x) {
-        game_text.textContent = "X to move"
+        game_text.textContent = p1_name + " to move"
     } else {
-        game_text.textContent = "O to move"
+        game_text.textContent = p2_name + " to move"
     }
 }
 

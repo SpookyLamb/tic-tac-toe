@@ -14,3 +14,12 @@
     border-right-width: 2px;
     width: 10vh;
 }
+
+.game-square {
+    cursor: pointer;
+}
+
+.input-field {
+    margin-bottom: 2vh;
+    width: 100px;
+}

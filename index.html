@@ -13,8 +13,12 @@
   <body class="vh-100">
     <div id="app">
         <div class="container main-wrapper">
-            <div class="row text-center">
+            <div class="row text-center d-flex justify-content-center">
                 <h1>Tic-Tac-Toe</h1>
+                <label for="p1-input">P1 Name (X):</label>
+                <input class="input-field" type="text" id="p1-input" name="p1-input">
+                <label for="p2-input">P2 Name (O):</label>
+                <input class="input-field" type="text" id="p2-input" name="p2-input">
             </div>
             <div class="row">
                 <div class="col-12 d-flex mx-auto">
@@ -40,7 +44,7 @@
             <div class="row text-center">
                 <p id="game-text">TEXT</p>
                 <div class="col-6 mx-auto">
-                    <button class="btn btn-primary" id="reset">RESET</button>
+                    <button class="btn btn-primary" id="reset">RESTART</button>
                 </div>
             </div>
         </div>
