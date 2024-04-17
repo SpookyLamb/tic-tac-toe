@@ -11,7 +11,7 @@
 // Randomize who goes first (DONE)
 // Allow players to enter their names (DONE)
 // Keep track of the number of games won by X and O (DONE)
-// Save information in local storage 
+// Save information in local storage (DONE)
 // Only have a single <div id="app"></div> in your index.HTML (try to code golf the HTML file)
 // Add a link to rules, display in a modal
 // Selectable themes - different board, background, and alternatives to X/O displays
@@ -76,17 +76,17 @@ function buildElement(tag, class_list, parent_node) {
     return node
 }
 
+function changeNames() {
+    p1_name = p1_input.value
+    p2_name = p2_input.value //names
+    setWinCounts()
+}
+
 function reset() {
     //resets the game to its initial state, including picking a new turn
     reset_button.textContent = "RESTART"
-    p1_name = p1_input.value
-    p2_name = p2_input.value //names
-
-    p1_wins.classList.remove("hidden-obj") //wins
-    p2_wins.classList.remove("hidden-obj") //wins
-
-    p1_wins.textContent = p1_name + " WINS: " + String(p1_win_count)
-    p2_wins.textContent = p2_name + " WINS: " + String(p2_win_count)
+    
+    changeNames()
 
     game_over = false
     boardState = [0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -105,6 +105,7 @@ function reset() {
     }
 
     switchTurn() // DRY, lol
+    saveGame()
 }
 
 function click(e) {
@@ -130,8 +131,9 @@ function click(e) {
 
     //console.log(boardState)
     
-    saveGame()
+    changeNames() //change names, if they were updated
     checkWin()
+    saveGame()
 }
 
 function checkWin() {
@@ -216,7 +218,6 @@ function doWin(victor) {
 
     setWinCounts()
     game_over = true //require the players to reset
-    saveGame()
 }
 
 function switchTurn() {
@@ -261,16 +262,24 @@ function loadGame() {
     p2_win_count = JSON.parse(localStorage.getItem("p2_win_count"))
     boardState = JSON.parse(localStorage.getItem("boardState"))
 
+    console.log(turn_x)
+
     //adjusts the visuals to match
+    p1_input.value = p1_name
+    p2_input.value = p2_name
+
     setBoardState()
     setTurn()
     setWinCounts()
 }
 
 function setTurn() {
-    if (game_over) {
-        game_text.textContent = "GAME OVER! Click RESTART!"
+    if (game_over) { //only fires if the game loads in a game over state
+        game_text.textContent = "GAME OVER! Click START!"
+        reset_button.textContent = "START"
         return
+    } else {
+        reset_button.textContent = "RESTART"
     }
     
     if (turn_x) {
@@ -281,8 +290,13 @@ function setTurn() {
 }
 
 function setWinCounts() {
-    p1_wins.textContent = p1_name + " WINS: " + String(p1_win_count)
-    p2_wins.textContent = p2_name + " WINS: " + String(p2_win_count)
+    if (p1_win_count > 0 || p2_win_count > 0) {
+        p1_wins.textContent = p1_name + " WINS: " + String(p1_win_count)
+        p2_wins.textContent = p2_name + " WINS: " + String(p2_win_count)
+
+        p1_wins.classList.remove("hidden-obj") //wins
+        p2_wins.classList.remove("hidden-obj") //wins
+    }
 }
 
 function setBoardState() {
