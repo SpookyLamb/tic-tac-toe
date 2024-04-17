@@ -86,6 +86,8 @@ function buildElement(tag, class_list, parent_node) {
 }
 
 function changeNames() {
+    console.log("changing names")
+
     p1_input_value = p1_input.value
 
     if (p1_name !== p1_input_value) {
@@ -318,13 +320,11 @@ function setTurn() {
 }
 
 function setWinCounts() {
-    if (p1_win_count > 0 || p2_win_count > 0) {
-        p1_wins.textContent = p1_name + " WINS: " + String(p1_win_count)
-        p2_wins.textContent = p2_name + " WINS: " + String(p2_win_count)
+    p1_wins.textContent = p1_name + " WINS: " + String(p1_win_count)
+    p2_wins.textContent = p2_name + " WINS: " + String(p2_win_count)
 
-        p1_wins.classList.remove("hidden-obj") //wins
-        p2_wins.classList.remove("hidden-obj") //wins
-    }
+    p1_wins.classList.remove("hidden-obj") //wins
+    p2_wins.classList.remove("hidden-obj") //wins
 }
 
 function setBoardState() {
