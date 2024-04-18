@@ -1,7 +1,12 @@
 h1 {
-    padding-top: 3vh;
-    padding-bottom: 3vh;
+    padding-top: 1vh;
+    padding-bottom: 2vh;
     font-size: 5vh;
+}
+
+.my-buttons {
+    margin-top: 1vh;
+    margin-bottom: 1vh;
 }
 
 .board-row {
@@ -42,11 +47,18 @@ h1 {
     width: 100px;
 }
 
+.rules-box {
+    border-style: solid;
+    border-width: 2px;
+    padding: 2vh;
+    margin-bottom: 2vh;
+}
+
 .hidden-obj {
     visibility: hidden;
 }
 
 .win-count {
-    margin-top: 2vh;
-    margin-bottom: 2vh;
+    margin-top: 1vh;
+    margin-bottom: 1vh;
 }

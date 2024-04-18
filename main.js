@@ -13,7 +13,7 @@
 // Keep track of the number of games won by X and O (DONE)
 // Save information in local storage (DONE)
 // Only have a single <div id="app"></div> in your index.HTML (try to code golf the HTML file) (DONE)
-// Add a link to rules, display in a modal
+// Add a link to rules, display in a modal (DONE)
 // Selectable themes - different board, background, and alternatives to X/O displays
 // Display multiple game boards at once
 
@@ -34,23 +34,16 @@ let boardState = [0, 0, 0, 0, 0, 0, 0, 0, 0]; //9 squares, left to right, top to
 
 const app = document.getElementById("app");
 
-let game_text, reset_button, p1_input, p2_input, p1_wins, p2_wins;
+let game_text, reset_button, rules_button, p1_input, p2_input, p1_wins, p2_wins;
 
 function init() {
     buildPage()
-    addClickEvents()
-    
     game_text.textContent = "Enter names, then press START!"
     reset_button.textContent = "START"
-
-    reset_button.addEventListener("click", reset)
-    p1_input.addEventListener("input", changeNames)
-    p2_input.addEventListener("input", changeNames)
-
     loadGame()
 }
 
-function addClickEvents() {
+function addEvents() {
     //adds click events to every game-square
     let squares = document.getElementsByClassName("game-square")
 
@@ -58,6 +51,11 @@ function addClickEvents() {
         let element = squares.item(i)
         element.addEventListener("click", click)
     }
+
+    reset_button.addEventListener("click", reset)
+    rules_button.addEventListener("click", buildRules)
+    p1_input.addEventListener("input", changeNames)
+    p2_input.addEventListener("input", changeNames)
 }
 
 function buildElement(tag, class_list, parent_node) {
@@ -182,12 +180,19 @@ function buildPage() {
     node.id = "game-text"
     game_text = node
     
-    parent = buildElement("div", ["col-12", "mx-auto", "text-center"], row)
-    node = buildElement("button", ["btn", "btn-primary"], parent)
+    parent = buildElement("div", ["col-6", "mx-auto", "text-center", "d-flex", "justify-content-end"], row)
+    node = buildElement("button", ["btn", "btn-primary", "my-buttons"], parent)
     node.id = "reset"
     reset_button = node
     node.textContent = "RESTART"
 
+    parent = buildElement("div", ["col-6", "mx-auto", "text-center", "d-flex", "justify-content-start"], row)
+    node = buildElement("button", ["btn", "btn-primary", "my-buttons"], parent)
+    node.id = "rules"
+    rules_button = node
+    node.textContent = "RULES"
+
+    parent = buildElement("div", ["col-12", "mx-auto", "text-center"], row)
     node = buildElement("h2", ["win-count", "hidden-obj"], parent)
     node.id = "p1-wins"
     node.textContent = "P1 WINS: 0"
@@ -198,6 +203,38 @@ function buildPage() {
     node.textContent = "P2 WINS: 0"
     p2_wins = node
 
+    addEvents()
+}
+
+function buildRules() {
+    //builds and displays the rrrrrrrrrules page
+
+    clearChildElements(app) //clear out any existing elements
+
+    const main_wrapper = buildElement("div", ["container", "main-wrapper"], app) //main parent
+
+    //title row
+    let row = buildElement("div", ["row", "text-center", "d-flex", "justify-content-center"], main_wrapper)
+
+    let parent = buildElement("div", ["col-12"], row)
+    let node = buildElement("h1", [], parent)
+    node.textContent = "Tic-Tac-Toe Rules"
+
+    //rules text row
+    row = buildElement("div", ["row", "text-center", "d-flex", "justify-content-center"], main_wrapper)
+
+    parent = buildElement("div", ["col-10", "rules-box"], row)
+    node = buildElement("p", ["text-start", "fs-5"], parent)
+    node.textContent = `Tic-tac-toe is played by two players on a three-by-three grid, who alternate placing marks (Xs and Os) in the empty spaces of the grid! The first player who gets three of their marks in a row (orthogonally or diagonally) wins! If all nine spaces are occupied and neither player has won, it's a Draw (or "Cat's Game")!`
+
+    //return button row
+    row = buildElement("div", ["row", "text-center"], main_wrapper)
+    
+    parent = buildElement("div", ["col-12", "mx-auto", "text-center"], row)
+    node = buildElement("button", ["btn", "btn-primary", "my-buttons"], parent)
+    node.id = "return"
+    node.textContent = "PLAY"
+    node.addEventListener("click", init)
 }
 
 function clearChildElements(parentElement) {
@@ -464,5 +501,9 @@ function setBoardState() {
         } //else, leave blank
     }
 }
+
+//CONNECT 4 (and the init call) BELOW THIS POINT
+
+
 
 init()
