@@ -271,6 +271,7 @@ function changeNames() {
 
     setWinCounts()
     setTurn() //note: doesn't change the turn, just the text
+    saveGame()
 }
 
 function reset() {
