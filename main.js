@@ -41,7 +41,23 @@ let connect_4 = false; //false by default, determines if the game is currently c
 let c4_p1_win_count = 0;
 let c4_p2_win_count = 0; //connect 4 win counts are distinct
 
+let connect4BoardState = {
+    col0: [],
+    col1: [],
+    col2: [],
+    col3: [],
+    col4: [],
+    col5: [], //each of these contain only 1s (for red) and 0s (for blue), blank squares simply aren't represented
+}
+
 function init() {
+    connect_4 = JSON.parse(localStorage.getItem("connect_4"))
+    if (connect_4) {
+        initConnect4()
+        return
+    }
+
+    document.title = "Tic-Tac-Toe"
     buildPage()
     game_text.textContent = "Enter names, then press START!"
     reset_button.textContent = "START"
@@ -284,7 +300,12 @@ function changeNames() {
 
     setWinCounts()
     setTurn() //note: doesn't change the turn, just the text
-    saveGame()
+
+    if (connect_4) {
+        saveConnect4()
+    } else {
+        saveGame()
+    }
 }
 
 function reset() {
@@ -333,8 +354,6 @@ function click(e) {
         e.target.textContent = "O"
         boardState[index] = 2 //O
     }
-
-    //console.log(boardState)
     
     checkWin()
     saveGame()
@@ -441,6 +460,7 @@ function saveGame() {
     // p2_win_count
     // boardState
 
+    localStorage.setItem("connect_4", JSON.stringify(connect_4))
     localStorage.setItem("turn_x", JSON.stringify(turn_x))
     localStorage.setItem("game_over", JSON.stringify(game_over))
     localStorage.setItem("p1_name", JSON.stringify(p1_name))
@@ -525,26 +545,25 @@ init()
 
 //CONNECT 4 METHODS BELOW THIS POINT
 
-let connect4BoardState = {
-    col0: [],
-    col1: [],
-    col2: [],
-    col3: [],
-    col4: [],
-    col5: [], //each of these contain only 1s (for red) and 0s (for blue), blank squares simply aren't represented
-}
-
 function switchGame() {
     if (connect_4) { //switch to TTT
-        connect_4 = !connect_4 //flip
+        connect_4 = false //flip
+        localStorage.setItem("connect_4", JSON.stringify(connect_4)) //save to file to prevent bad loads
         init()
+        saveGame()
     } else { //switch to C4
-        connect_4 = !connect_4 //flip
+        connect_4 = true //flip
         initConnect4()
+        saveConnect4()
     }
 }
 
 function initConnect4() {
+    if (!connect_4) {
+        init()
+        return
+    }
+    document.title = "Connect Four"
     buildConnect4()
     game_text.textContent = "Enter names, then press START!"
     reset_button.textContent = "START"
@@ -967,6 +986,7 @@ function saveConnect4() {
     // c4_p2_win_count - distinct
     // connect4BoardState -distinct
 
+    localStorage.setItem("connect_4", JSON.stringify(connect_4))
     localStorage.setItem("turn_red", JSON.stringify(turn_x))
     localStorage.setItem("c4_game_over", JSON.stringify(game_over))
     localStorage.setItem("p1_name", JSON.stringify(p1_name))
