@@ -245,7 +245,6 @@ function clearChildElements(parentElement) {
 }
 
 function changeNames() {
-    //console.log("changing names")
 
     p1_input_value = p1_input.value
 
@@ -503,8 +502,126 @@ function setBoardState() {
     }
 }
 
-//CONNECT 4 (and the init call) BELOW THIS POINT
-
-
-
 init()
+
+//CONNECT 4 BELOW THIS POINT
+
+let c4_reset, c4_rules;
+
+function buildConnect4() {
+    //this is very similar to buildPage but with added columns/rows
+    //builds the page from pure JS, using buildElement()
+    clearChildElements(app)
+
+    // main wrapper
+    const main_wrapper = buildElement("div", ["container", "main-wrapper"], app) //main parent
+    
+    //header
+
+    let row = buildElement("div", ["row", "text-center", "d-flex", "justify-content-center"], main_wrapper)
+
+    let parent = buildElement("div", ["col-12"], row)
+    let node = buildElement("h1", [], parent)
+    node.textContent = "Connect Four"
+
+    //inputs, nearly identical to ttt
+    parent = buildElement("div", ["col-6"], row)
+    node = buildElement("label", [], parent)
+    node.for = "p1-input"
+    node.textContent = "P1 Name (Red):"
+    node = buildElement("input", ["input-field"], parent)
+    node.type = "text"
+    node.id = "p1-input"
+    node.name = "p1-input"
+    p1_input = node
+
+    parent = buildElement("div", ["col-6"], row)
+    node = buildElement("label", [], parent)
+    node.for = "p2-input"
+    node.textContent = "P2 Name (Blue):"
+    node = buildElement("input", ["input-field"], parent)
+    node.type = "text"
+    node.id = "p2-input"
+    node.name = "p2-input"
+    p2_input = node
+
+    //game board
+
+    row = buildElement("div", ["row"], main_wrapper)
+    parent = buildElement("div", ["col-12", "d-flex", "mx-auto", "board-wrapper"], row)
+    let board = buildElement("div", ["mx-auto"], parent)
+    board.id = "game-board"
+
+    const game_square_classes = ["col-4", "board-col", "game-square", "text-center", "d-flex", "flex-column", "justify-content-center"]
+
+    parent = buildElement("div", ["row", "board-row"], board)
+    node = buildElement("div", game_square_classes, parent)
+    node.id = "0"
+    node = buildElement("div", game_square_classes, parent)
+    node.classList.add("col-mid")
+    node.id = "1"
+    node = buildElement("div", game_square_classes, parent)
+    node.id = "2"
+
+    parent = buildElement("div", ["row", "board-row", "row-mid"], board)
+    node = buildElement("div", game_square_classes, parent)
+    node.id = "3"
+    node = buildElement("div", game_square_classes, parent)
+    node.classList.add("col-mid")
+    node.id = "4"
+    node = buildElement("div", game_square_classes, parent)
+    node.id = "5"
+
+    parent = buildElement("div", ["row", "board-row"], board)
+    node = buildElement("div", game_square_classes, parent)
+    node.id = "6"
+    node = buildElement("div", game_square_classes, parent)
+    node.classList.add("col-mid")
+    node.id = "7"
+    node = buildElement("div", game_square_classes, parent)
+    node.id = "8"    
+
+    //footer and buttons
+
+    row = buildElement("div", ["row", "text-center"], main_wrapper)
+    node = buildElement("p", [], row)
+    node.id = "game-text"
+    game_text = node
+    
+    parent = buildElement("div", ["col-6", "mx-auto", "text-center", "d-flex", "justify-content-end"], row)
+    node = buildElement("button", ["btn", "btn-primary", "my-buttons"], parent)
+    node.id = "reset"
+    reset_button = node
+    node.textContent = "RESTART"
+
+    parent = buildElement("div", ["col-6", "mx-auto", "text-center", "d-flex", "justify-content-start"], row)
+    node = buildElement("button", ["btn", "btn-primary", "my-buttons"], parent)
+    node.id = "rules"
+    rules_button = node
+    node.textContent = "RULES"
+
+    parent = buildElement("div", ["col-12", "mx-auto", "text-center"], row)
+    node = buildElement("h2", ["win-count", "hidden-obj"], parent)
+    node.id = "p1-wins"
+    node.textContent = "P1 WINS: 0"
+    p1_wins = node
+    
+    node = buildElement("h2", ["win-count", "hidden-obj"], parent)
+    node.id = "p2-wins"
+    node.textContent = "P2 WINS: 0"
+    p2_wins = node
+
+    addConnect4Events()
+}
+
+function saveConnect4() {
+
+}
+
+function loadConnect4() {
+
+}
+
+function addConnect4Events() {
+
+}
