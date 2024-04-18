@@ -12,7 +12,7 @@
 // Allow players to enter their names (DONE)
 // Keep track of the number of games won by X and O (DONE)
 // Save information in local storage (DONE)
-// Only have a single <div id="app"></div> in your index.HTML (try to code golf the HTML file)
+// Only have a single <div id="app"></div> in your index.HTML (try to code golf the HTML file) (DONE)
 // Add a link to rules, display in a modal
 // Selectable themes - different board, background, and alternatives to X/O displays
 // Display multiple game boards at once
@@ -32,16 +32,12 @@ let p2_win_count = 0;
 
 let boardState = [0, 0, 0, 0, 0, 0, 0, 0, 0]; //9 squares, left to right, top to bottom - 0 is blank, 1 is X, 2 (or above) is O
 
-const game_text = document.getElementById("game-text");
-const reset_button = document.getElementById("reset");
+const app = document.getElementById("app");
 
-const p1_input = document.getElementById("p1-input");
-const p2_input = document.getElementById("p2-input");
-
-const p1_wins = document.getElementById("p1-wins");
-const p2_wins = document.getElementById("p2-wins");
+let game_text, reset_button, p1_input, p2_input, p1_wins, p2_wins;
 
 function init() {
+    buildPage()
     addClickEvents()
     
     game_text.textContent = "Enter names, then press START!"
@@ -64,10 +60,6 @@ function addClickEvents() {
     }
 }
 
-function buildPage() {
-
-}
-
 function buildElement(tag, class_list, parent_node) {
     //takes tag (string), class_list (array of strings), element_id (string)
     //return the created node to be used elsewhere
@@ -85,8 +77,138 @@ function buildElement(tag, class_list, parent_node) {
     return node
 }
 
+function buildPage() {
+    //builds the page from pure JS, using buildElement()
+    clearChildElements(app)
+
+    // <div class="container main-wrapper">
+    const main_wrapper = buildElement("div", ["container", "main-wrapper"], app) //main parent
+    
+    //     <div class="row text-center d-flex justify-content-center">
+    //         <div class="col-12">
+    //             <h1>Tic-Tac-Toe</h1>
+    //         <div class="col-6">
+    //             <label for="p1-input">P1 Name (X):</label>
+    //             <input class="input-field" type="text" id="p1-input" name="p1-input">
+    //         <div class="col-6">
+    //             <label for="p2-input">P2 Name (O):</label>
+    //             <input class="input-field" type="text" id="p2-input" name="p2-input">
+
+    let row = buildElement("div", ["row", "text-center", "d-flex", "justify-content-center"], main_wrapper)
+
+    let parent = buildElement("div", ["col-12"], row)
+    let node = buildElement("h1", [], parent)
+    node.textContent = "Tic-Tac-Toe"
+
+    parent = buildElement("div", ["col-6"], row)
+    node = buildElement("label", [], parent)
+    node.for = "p1-input"
+    node.textContent = "P1 Name (X):"
+    node = buildElement("input", ["input-field"], parent)
+    node.type = "text"
+    node.id = "p1-input"
+    node.name = "p1-input"
+    p1_input = node
+
+    parent = buildElement("div", ["col-6"], row)
+    node = buildElement("label", [], parent)
+    node.for = "p2-input"
+    node.textContent = "P2 Name (O):"
+    node = buildElement("input", ["input-field"], parent)
+    node.type = "text"
+    node.id = "p2-input"
+    node.name = "p2-input"
+    p2_input = node
+
+    //     <div class="row">
+    //         <div class="col-12 d-flex mx-auto board-wrapper">
+    //             <div class="mx-auto" id="game-board">
+    //                 <div class="row board-row">
+    //                     <div class="col-4 board-col game-square text-center d-flex flex-column justify-content-center" id="0"></div>
+    //                     <div class="col-4 board-col game-square text-center d-flex flex-column justify-content-center col-mid" id="1"></div>
+    //                     <div class="col-4 board-col game-square text-center d-flex flex-column justify-content-center" id="2"></div>
+    //                 <div class="row board-row row-mid">
+    //                     <div class="col-4 board-col game-square text-center d-flex flex-column justify-content-center" id="3"></div>
+    //                     <div class="col-4 board-col game-square text-center d-flex flex-column justify-content-center col-mid" id="4"></div>
+    //                     <div class="col-4 board-col game-square text-center d-flex flex-column justify-content-center" id="5"></div>
+    //                 <div class="row board-row">
+    //                     <div class="col-4 board-col game-square text-center d-flex flex-column justify-content-center" id="6"></div>
+    //                     <div class="col-4 board-col game-square text-center d-flex flex-column justify-content-center col-mid" id="7"></div>
+    //                     <div class="col-4 board-col game-square text-center d-flex flex-column justify-content-center" id="8"></div>
+
+    row = buildElement("div", ["row"], main_wrapper)
+    parent = buildElement("div", ["col-12", "d-flex", "mx-auto", "board-wrapper"], row)
+    let board = buildElement("div", ["mx-auto"], parent)
+    board.id = "game-board"
+
+    const game_square_classes = ["col-4", "board-col", "game-square", "text-center", "d-flex", "flex-column", "justify-content-center"]
+
+    parent = buildElement("div", ["row", "board-row"], board)
+    node = buildElement("div", game_square_classes, parent)
+    node.id = "0"
+    node = buildElement("div", game_square_classes, parent)
+    node.classList.add("col-mid")
+    node.id = "1"
+    node = buildElement("div", game_square_classes, parent)
+    node.id = "2"
+
+    parent = buildElement("div", ["row", "board-row", "row-mid"], board)
+    node = buildElement("div", game_square_classes, parent)
+    node.id = "3"
+    node = buildElement("div", game_square_classes, parent)
+    node.classList.add("col-mid")
+    node.id = "4"
+    node = buildElement("div", game_square_classes, parent)
+    node.id = "5"
+
+    parent = buildElement("div", ["row", "board-row"], board)
+    node = buildElement("div", game_square_classes, parent)
+    node.id = "6"
+    node = buildElement("div", game_square_classes, parent)
+    node.classList.add("col-mid")
+    node.id = "7"
+    node = buildElement("div", game_square_classes, parent)
+    node.id = "8"    
+
+    //     <div class="row text-center">
+    //         <p id="game-text">TEXT</p>
+    //         <div class="col-12 mx-auto text-center">
+    //             <button class="btn btn-primary" id="reset">RESTART</button>
+    //             <h2 class="win-count hidden-obj" id="p1-wins">P1 WINS: 0</h2>
+    //             <h2 class="win-count hidden-obj" id="p2-wins">P2 WINS: 0</h2>
+
+    row = buildElement("div", ["row", "text-center"], main_wrapper)
+    node = buildElement("p", [], row)
+    node.id = "game-text"
+    game_text = node
+    
+    parent = buildElement("div", ["col-12", "mx-auto", "text-center"], row)
+    node = buildElement("button", ["btn", "btn-primary"], parent)
+    node.id = "reset"
+    reset_button = node
+    node.textContent = "RESTART"
+
+    node = buildElement("h2", ["win-count", "hidden-obj"], parent)
+    node.id = "p1-wins"
+    node.textContent = "P1 WINS: 0"
+    p1_wins = node
+    
+    node = buildElement("h2", ["win-count", "hidden-obj"], parent)
+    node.id = "p2-wins"
+    node.textContent = "P2 WINS: 0"
+    p2_wins = node
+
+}
+
+function clearChildElements(parentElement) {
+    // clears the child elements of a given element
+  
+    const node_list = Array.from(parentElement.childNodes) //grab a copy of the array to iterate across
+    node_list.forEach((element) => element.remove())
+}
+
 function changeNames() {
-    console.log("changing names")
+    //console.log("changing names")
 
     p1_input_value = p1_input.value
 

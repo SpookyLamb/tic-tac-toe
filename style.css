@@ -1,3 +1,8 @@
+h1 {
+    padding-top: 3vh;
+    padding-bottom: 3vh;
+    font-size: 5vh;
+}
 
 .board-row {
     height: 13vh;
@@ -29,6 +34,7 @@
 
 .game-square {
     cursor: pointer;
+    font-size: 8vh;
 }
 
 .input-field {
