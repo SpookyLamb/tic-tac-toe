@@ -1,0 +1,64 @@
+h1 {
+    padding-top: 1vh;
+    padding-bottom: 2vh;
+    font-size: 5vh;
+}
+
+.my-buttons {
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
+
+.board-row {
+    height: 13vh;
+}
+
+.row-mid {
+    border-style: solid;
+    border-width: 0px;
+    border-top-width: 2px;
+    border-bottom-width: 2px;
+    height: 13vh;
+}
+
+.board-col {
+    width: 13vh;
+}
+
+.board-wrapper {
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+}
+
+.col-mid {
+    border-style: solid;
+    border-width: 0px;
+    border-left-width: 2px;
+    border-right-width: 2px;
+}
+
+.game-square {
+    cursor: pointer;
+    font-size: 8vh;
+}
+
+.input-field {
+    margin-bottom: 2vh;
+    width: 100px;
+}
+
+.rules-box {
+    border-style: solid;
+    border-width: 2px;
+    padding: 2vh;
+    margin-bottom: 2vh;
+}
+
+.hidden-obj {
+    visibility: hidden;
+}
+
+.win-count {
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+}
