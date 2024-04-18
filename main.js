@@ -186,19 +186,19 @@ function buildPage() {
     node.id = "game-text"
     game_text = node
     
-    parent = buildElement("div", ["col-4", "mx-auto", "text-center", "d-flex", "justify-content-end"], row)
+    parent = buildElement("div", ["col-6", "mx-auto", "text-center", "d-flex", "justify-content-end"], row)
     node = buildElement("button", ["btn", "btn-primary", "my-buttons"], parent)
     node.id = "rules"
     rules_button = node
     node.textContent = "RULES"
 
-    parent = buildElement("div", ["col-4", "mx-auto", "text-center", "d-flex", "justify-content-center"], row)
+    parent = buildElement("div", ["col-6", "mx-auto", "text-center", "d-flex", "justify-content-start"], row)
     node = buildElement("button", ["btn", "btn-primary", "my-buttons"], parent)
     node.id = "reset"
     reset_button = node
     node.textContent = "RESTART"
 
-    parent = buildElement("div", ["col-4", "mx-auto", "text-center", "d-flex", "justify-content-start"], row)
+    parent = buildElement("div", ["col-12", "mx-auto", "text-center", "d-flex", "justify-content-center"], row)
     node = buildElement("button", ["btn", "btn-primary", "my-buttons"], parent)
     node.id = "switch-game"
     switch_game_button = node
@@ -263,6 +263,7 @@ function changeNames() {
     if (p1_name !== p1_input_value) {
         p1_name = p1_input_value
         p1_win_count = 0
+        c4_p1_win_count = 0
     }
     
     if (!p1_name) { //empty string
@@ -274,6 +275,7 @@ function changeNames() {
     if (p2_name !== p2_input_value) {
         p2_name = p2_input_value
         p2_win_count = 0
+        c4_p2_win_count = 0
     }
 
     if (!p2_name) {
@@ -680,19 +682,19 @@ function buildConnect4() {
     node.id = "game-text"
     game_text = node
     
-    parent = buildElement("div", ["col-4", "mx-auto", "text-center", "d-flex", "justify-content-end"], row)
+    parent = buildElement("div", ["col-6", "mx-auto", "text-center", "d-flex", "justify-content-end"], row)
     node = buildElement("button", ["btn", "btn-primary", "my-buttons"], parent)
     node.id = "rules"
     rules_button = node
     node.textContent = "RULES"
 
-    parent = buildElement("div", ["col-4", "mx-auto", "text-center", "d-flex", "justify-content-center"], row)
+    parent = buildElement("div", ["col-6", "mx-auto", "text-center", "d-flex", "justify-content-start"], row)
     node = buildElement("button", ["btn", "btn-primary", "my-buttons"], parent)
     node.id = "reset"
     reset_button = node
     node.textContent = "RESTART"
 
-    parent = buildElement("div", ["col-4", "mx-auto", "text-center", "d-flex", "justify-content-start"], row)
+    parent = buildElement("div", ["col-12", "mx-auto", "text-center", "d-flex", "justify-content-center"], row)
     node = buildElement("button", ["btn", "btn-primary", "my-buttons"], parent)
     node.id = "switch-game"
     switch_game_button = node
