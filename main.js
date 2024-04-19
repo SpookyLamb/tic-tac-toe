@@ -139,6 +139,7 @@ function buildPage() {
     node.type = "text"
     node.id = "p1-input"
     node.name = "p1-input"
+    node.maxlength = "12"
     p1_input = node
 
     parent = buildElement("div", ["col-6"], row)
@@ -149,6 +150,7 @@ function buildPage() {
     node.type = "text"
     node.id = "p2-input"
     node.name = "p2-input"
+    node.maxlength = "12"
     p2_input = node
 
     //     <div class="row">
@@ -284,8 +286,13 @@ function clearChildElements(parentElement) {
 }
 
 function changeNames() {
+    
+    let p1_input_value = p1_input.value
 
-    p1_input_value = p1_input.value
+    if (p1_input_value.length > 12) { //guard
+        p1_input_value = p1_name
+        p1_input.value = p1_input_value
+    }
 
     if (p1_name !== p1_input_value) {
         p1_name = p1_input_value
@@ -297,7 +304,12 @@ function changeNames() {
         p1_name = "X"
     }
 
-    p2_input_value = p2_input.value
+    let p2_input_value = p2_input.value
+
+    if (p2_input_value.length > 12) { //guard
+        p2_input_value = p2_name
+        p2_input.value = p2_input_value
+    }
 
     if (p2_name !== p2_input_value) {
         p2_name = p2_input_value
@@ -618,6 +630,7 @@ function buildConnect4() {
     node.type = "text"
     node.id = "p1-input"
     node.name = "p1-input"
+    node.maxlength = "12"
     p1_input = node
 
     parent = buildElement("div", ["col-6"], row)
@@ -628,6 +641,7 @@ function buildConnect4() {
     node.type = "text"
     node.id = "p2-input"
     node.name = "p2-input"
+    node.maxlength = "12"
     p2_input = node
 
     //game board, VERY different from TTT
