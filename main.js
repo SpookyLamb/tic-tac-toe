@@ -612,10 +612,10 @@ function buildConnect4() {
 
     row = buildElement("div", ["row"], main_wrapper)
     parent = buildElement("div", ["col-12", "d-flex", "mx-auto", "board-wrapper"], row)
-    let board = buildElement("div", ["mx-auto"], parent)
+    let board = buildElement("div", ["mx-auto", "c4-game-board"], parent)
     board.id = "game-board"
 
-    const game_square_classes = ["col-2", "c4-col", "game-square", "text-center", "d-flex", "flex-column", "justify-content-center"]
+    const game_square_classes = ["col-2", "c4-col", "game-square", "c4-game-square", "text-center", "d-flex", "flex-column", "justify-content-center"]
     const game_row_classes = ["row", "c4-row"]
 
 

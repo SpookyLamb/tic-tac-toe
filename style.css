@@ -7,6 +7,7 @@ h1 {
 .my-buttons {
     margin-top: 1vh;
     margin-bottom: 1vh;
+    min-width: 12vh;
 }
 
 .board-row {
@@ -64,19 +65,34 @@ h1 {
 }
 
 .c4-col {
-    border-style: solid;
+    /* border-style: solid;
     border-width: 0px;
     border-right-width: 1px;
-    border-left-width: 1px;
+    border-left-width: 1px; */
     width: 7vh;
 }
 
 .c4-row {
-    border-style: solid;
+    /* border-style: solid;
     border-width: 0px;
     border-top-width: 1px;
-    border-bottom-width: 1px;
+    border-bottom-width: 1px; */
     height: 7vh;
+}
+
+.c4-game-square {
+    border-style: solid;
+    border-width: 3px;
+    border-radius: 7vh;
+    background-color: white;
+    border-color: #212529;
+}
+
+.c4-game-board {
+    border-style: solid;
+    border-width: 5px;
+    padding: 1.5vh;
+    background-color: #212529;
 }
 
 .c4-red {
