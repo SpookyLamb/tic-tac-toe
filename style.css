@@ -1,3 +1,7 @@
+body {
+    background-color: lightgray;
+}
+
 h1 {
     padding-top: 1vh;
     padding-bottom: 2vh;
@@ -53,6 +57,7 @@ h1 {
     border-width: 2px;
     padding: 2vh;
     margin-bottom: 2vh;
+    background-color: whitesmoke;
 }
 
 .hidden-obj {

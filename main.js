@@ -62,6 +62,17 @@ function init() {
     game_text.textContent = "Enter names, then press START!"
     reset_button.textContent = "START"
     loadGame()
+
+    if (p1_name == "Red") {
+        p1_name = "X"
+        p1_input.value = p1_name
+        changeNames()
+    }
+    if (p2_name == "Blue") {
+        p2_name = "O"
+        p2_input.value = p2_name
+        changeNames()
+    }
 }
 
 function addEvents() {
@@ -209,13 +220,13 @@ function buildPage() {
     node.textContent = "RULES"
 
     parent = buildElement("div", ["col-6", "mx-auto", "text-center", "d-flex", "justify-content-start"], row)
-    node = buildElement("button", ["btn", "btn-primary", "my-buttons"], parent)
+    node = buildElement("button", ["btn", "btn-danger", "my-buttons"], parent)
     node.id = "reset"
     reset_button = node
     node.textContent = "RESTART"
 
     parent = buildElement("div", ["col-12", "mx-auto", "text-center", "d-flex", "justify-content-center"], row)
-    node = buildElement("button", ["btn", "btn-primary", "my-buttons"], parent)
+    node = buildElement("button", ["btn", "btn-success", "my-buttons"], parent)
     node.id = "switch-game"
     switch_game_button = node
     node.textContent = "CONNECT 4"
@@ -563,11 +574,23 @@ function initConnect4() {
         init()
         return
     }
+
     document.title = "Connect Four"
     buildConnect4()
     game_text.textContent = "Enter names, then press START!"
     reset_button.textContent = "START"
     loadConnect4()
+
+    if (p1_name == "X") {
+        p1_name = "Red"
+        p1_input.value = p1_name    
+        changeNames()
+    }
+    if (p2_name == "O") {
+        p2_name = "Blue"
+        p2_input.value = p2_name
+        changeNames()
+    }
 }
 
 function buildConnect4() {
@@ -708,13 +731,13 @@ function buildConnect4() {
     node.textContent = "RULES"
 
     parent = buildElement("div", ["col-6", "mx-auto", "text-center", "d-flex", "justify-content-start"], row)
-    node = buildElement("button", ["btn", "btn-primary", "my-buttons"], parent)
+    node = buildElement("button", ["btn", "btn-danger", "my-buttons"], parent)
     node.id = "reset"
     reset_button = node
     node.textContent = "RESTART"
 
     parent = buildElement("div", ["col-12", "mx-auto", "text-center", "d-flex", "justify-content-center"], row)
-    node = buildElement("button", ["btn", "btn-primary", "my-buttons"], parent)
+    node = buildElement("button", ["btn", "btn-success", "my-buttons"], parent)
     node.id = "switch-game"
     switch_game_button = node
     node.textContent = "TIC-TAC-TOE"
