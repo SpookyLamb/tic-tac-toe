@@ -209,7 +209,7 @@ function buildPage() {
     //             <h2 class="win-count hidden-obj" id="p2-wins">P2 WINS: 0</h2>
 
     row = buildElement("div", ["row", "text-center"], main_wrapper)
-    node = buildElement("p", [], row)
+    node = buildElement("p", ["fs-5"], row)
     node.id = "game-text"
     game_text = node
     
@@ -720,7 +720,7 @@ function buildConnect4() {
     //footer and buttons, similar to TTT
 
     row = buildElement("div", ["row", "text-center"], main_wrapper)
-    node = buildElement("p", [], row)
+    node = buildElement("p", ["fs-5"], row)
     node.id = "game-text"
     game_text = node
     
