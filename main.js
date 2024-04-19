@@ -62,6 +62,17 @@ function init() {
     game_text.textContent = "Enter names, then press START!"
     reset_button.textContent = "START"
     loadGame()
+
+    if (p1_name == "Red") {
+        p1_name = "X"
+        p1_input.value = p1_name
+        changeNames()
+    }
+    if (p2_name == "Blue") {
+        p2_name = "O"
+        p2_input.value = p2_name
+        changeNames()
+    }
 }
 
 function addEvents() {
@@ -128,6 +139,7 @@ function buildPage() {
     node.type = "text"
     node.id = "p1-input"
     node.name = "p1-input"
+    node.maxlength = "12"
     p1_input = node
 
     parent = buildElement("div", ["col-6"], row)
@@ -138,6 +150,7 @@ function buildPage() {
     node.type = "text"
     node.id = "p2-input"
     node.name = "p2-input"
+    node.maxlength = "12"
     p2_input = node
 
     //     <div class="row">
@@ -198,7 +211,7 @@ function buildPage() {
     //             <h2 class="win-count hidden-obj" id="p2-wins">P2 WINS: 0</h2>
 
     row = buildElement("div", ["row", "text-center"], main_wrapper)
-    node = buildElement("p", [], row)
+    node = buildElement("p", ["fs-5"], row)
     node.id = "game-text"
     game_text = node
     
@@ -209,13 +222,13 @@ function buildPage() {
     node.textContent = "RULES"
 
     parent = buildElement("div", ["col-6", "mx-auto", "text-center", "d-flex", "justify-content-start"], row)
-    node = buildElement("button", ["btn", "btn-primary", "my-buttons"], parent)
+    node = buildElement("button", ["btn", "btn-danger", "my-buttons"], parent)
     node.id = "reset"
     reset_button = node
     node.textContent = "RESTART"
 
     parent = buildElement("div", ["col-12", "mx-auto", "text-center", "d-flex", "justify-content-center"], row)
-    node = buildElement("button", ["btn", "btn-primary", "my-buttons"], parent)
+    node = buildElement("button", ["btn", "btn-success", "my-buttons"], parent)
     node.id = "switch-game"
     switch_game_button = node
     node.textContent = "CONNECT 4"
@@ -273,8 +286,13 @@ function clearChildElements(parentElement) {
 }
 
 function changeNames() {
+    
+    let p1_input_value = p1_input.value
 
-    p1_input_value = p1_input.value
+    if (p1_input_value.length > 12) { //guard
+        p1_input_value = p1_name
+        p1_input.value = p1_input_value
+    }
 
     if (p1_name !== p1_input_value) {
         p1_name = p1_input_value
@@ -286,7 +304,12 @@ function changeNames() {
         p1_name = "X"
     }
 
-    p2_input_value = p2_input.value
+    let p2_input_value = p2_input.value
+
+    if (p2_input_value.length > 12) { //guard
+        p2_input_value = p2_name
+        p2_input.value = p2_input_value
+    }
 
     if (p2_name !== p2_input_value) {
         p2_name = p2_input_value
@@ -563,11 +586,23 @@ function initConnect4() {
         init()
         return
     }
+
     document.title = "Connect Four"
     buildConnect4()
     game_text.textContent = "Enter names, then press START!"
     reset_button.textContent = "START"
     loadConnect4()
+
+    if (p1_name == "X") {
+        p1_name = "Red"
+        p1_input.value = p1_name    
+        changeNames()
+    }
+    if (p2_name == "O") {
+        p2_name = "Blue"
+        p2_input.value = p2_name
+        changeNames()
+    }
 }
 
 function buildConnect4() {
@@ -595,6 +630,7 @@ function buildConnect4() {
     node.type = "text"
     node.id = "p1-input"
     node.name = "p1-input"
+    node.maxlength = "12"
     p1_input = node
 
     parent = buildElement("div", ["col-6"], row)
@@ -605,6 +641,7 @@ function buildConnect4() {
     node.type = "text"
     node.id = "p2-input"
     node.name = "p2-input"
+    node.maxlength = "12"
     p2_input = node
 
     //game board, VERY different from TTT
@@ -612,10 +649,10 @@ function buildConnect4() {
 
     row = buildElement("div", ["row"], main_wrapper)
     parent = buildElement("div", ["col-12", "d-flex", "mx-auto", "board-wrapper"], row)
-    let board = buildElement("div", ["mx-auto"], parent)
+    let board = buildElement("div", ["mx-auto", "c4-game-board"], parent)
     board.id = "game-board"
 
-    const game_square_classes = ["col-2", "c4-col", "game-square", "text-center", "d-flex", "flex-column", "justify-content-center"]
+    const game_square_classes = ["col-2", "c4-col", "game-square", "c4-game-square", "text-center", "d-flex", "flex-column", "justify-content-center"]
     const game_row_classes = ["row", "c4-row"]
 
 
@@ -697,7 +734,7 @@ function buildConnect4() {
     //footer and buttons, similar to TTT
 
     row = buildElement("div", ["row", "text-center"], main_wrapper)
-    node = buildElement("p", [], row)
+    node = buildElement("p", ["fs-5"], row)
     node.id = "game-text"
     game_text = node
     
@@ -708,13 +745,13 @@ function buildConnect4() {
     node.textContent = "RULES"
 
     parent = buildElement("div", ["col-6", "mx-auto", "text-center", "d-flex", "justify-content-start"], row)
-    node = buildElement("button", ["btn", "btn-primary", "my-buttons"], parent)
+    node = buildElement("button", ["btn", "btn-danger", "my-buttons"], parent)
     node.id = "reset"
     reset_button = node
     node.textContent = "RESTART"
 
     parent = buildElement("div", ["col-12", "mx-auto", "text-center", "d-flex", "justify-content-center"], row)
-    node = buildElement("button", ["btn", "btn-primary", "my-buttons"], parent)
+    node = buildElement("button", ["btn", "btn-success", "my-buttons"], parent)
     node.id = "switch-game"
     switch_game_button = node
     node.textContent = "TIC-TAC-TOE"
