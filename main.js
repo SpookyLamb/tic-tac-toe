@@ -959,6 +959,16 @@ function checkConnect4Win() {
     }
 
     //then check for a draw (all squares filled with no winner from above)
+    let draw = true
+    for (let i = 0; i < col_arr.length; i++) {
+        if (col_arr[i].length < 5) { //empty spaces left
+            draw = false
+        }
+    }
+    
+    if (draw) {
+        doConnect4Win(2)
+    }
 
     switchTurn() //otherwise, switch the turn!
 }
